@@ -12,8 +12,8 @@ const SearchHeader = ({onSearch}) => {
         handleSearch();
     };
 
-    const onKeyPress = (event) => {
-        if(event.key === 'Enter') {
+    const onKeyPress = event => {
+        if (event.key === 'Enter') {
             handleSearch();
         }
     };
@@ -26,7 +26,7 @@ const SearchHeader = ({onSearch}) => {
             </div>
             <input ref={inputRef}
                    className={styles.input} type="search" placeholder=" Search 🔎"
-                   onKeyPress={onKeyPress} />
+                   onKeyPress={onKeyPress}/>
             <button className={styles.button} type="submit" onClick={onClick}>
                 <img className={styles.buttonImg} src="/images/search.png" alt="search"/>
             </button>
