@@ -12,6 +12,10 @@ function App({youtube}) {
         setSelectedVideo(video);
     }, []);
 
+    const onClickLogo = useCallback(() => {
+        setSelectedVideo(null);
+    }, []);
+
     const search = useCallback(query => {
         youtube
             .search(query)
@@ -29,7 +33,7 @@ function App({youtube}) {
 
     return (
         <div className={styles.app}>
-            <SearchHeader onSearch={search}/>
+            <SearchHeader onSearch={search} onClickLogo={onClickLogo}/>
             <section className={styles.content}>
                 {selectedVideo && (
                     <div className={styles.detail}>
