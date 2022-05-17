@@ -7,8 +7,8 @@ import Editor from "../editor/editor";
 import Preview from "../preview/preview";
 
 const Maker = ({authService}) => {
-    const [cards, setCards] = useState([
-        {
+    const [cards, setCards] = useState({
+        '1': {
             id: '1',
             name: 'SJ1',
             company: 'ABC',
@@ -19,7 +19,7 @@ const Maker = ({authService}) => {
             fileName: 'SJ',
             fileURL: null,
         },
-        {
+        '2': {
             id: '2',
             name: 'SJ2',
             company: 'ABC',
@@ -30,7 +30,7 @@ const Maker = ({authService}) => {
             fileName: 'SJ',
             fileURL: 'SJ.png',
         },
-        {
+        '3': {
             id: '3',
             name: 'SJ3',
             company: 'ABC',
@@ -41,7 +41,8 @@ const Maker = ({authService}) => {
             fileName: 'SJ',
             fileURL: null,
         }
-    ]);
+    });
+
     const navigate = useNavigate();
     const onLogout = () => {
         authService.logout();
@@ -55,18 +56,30 @@ const Maker = ({authService}) => {
         });
     });
 
-    const addCard = card => {
+    const addOrUpdateCard = card => {
+        setCards(cards => {
+            const updated = {...cards}
+            updated[card.id] = card;
+            return updated;
+        });
         console.log(card);
-        const updated = [...cards, card];
-        setCards(updated);
+    }
+
+    const deleteCard = card => {
+        setCards(cards => {
+            const updated = {...cards}
+            delete updated[card.id];
+            return updated;
+        });
+        console.log(card);
     }
 
     return (
         <section className={styles.maker}>
             <Header onLogout={onLogout}/>
             <div className={styles.container}>
-                <Editor cards={cards} addCard={addCard}/>
-                <Preview cards={cards} />
+                <Editor cards={cards} addCard={addOrUpdateCard} updateCard={addOrUpdateCard} deleteCard={deleteCard}/>
+                <Preview cards={cards}/>
             </div>
             <Footer/>
         </section>
