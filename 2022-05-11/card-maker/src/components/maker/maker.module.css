@@ -5,15 +5,17 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    max-width: 80rem;
 }
 
 .container {
     display: flex;
     flex: 1;
+    min-height: 0;
 }
 
 @media screen and (max-width: mediaQuery) {
     .container {
-    flex-direction: column;
+        flex-direction: column;
     }
 }
