@@ -5,6 +5,7 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import Editor from "../editor/editor";
 import Preview from "../preview/preview";
+import card from "../card/card";
 
 const Maker = ({FileInput, authService, cardRepository}) => {
     const navigate = useNavigate();
@@ -15,6 +16,16 @@ const Maker = ({FileInput, authService, cardRepository}) => {
     const onLogout = () => {
         authService.logout();
     }
+
+    useEffect(() => {
+        if (!userId) {
+            return;
+        }
+        const stopSync = cardRepository.syncCards(userId, cards => {
+            setCards(cards);
+        });
+        return () => stopSync();
+    }, [userId]);
 
     useEffect(() => {
         authService.onAuthChange(user => {
