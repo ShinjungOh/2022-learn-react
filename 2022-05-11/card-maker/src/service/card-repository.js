@@ -9,7 +9,7 @@ class CardRepository {
             const value = snapshot.val();
             value && onUpdate(value);
         });
-        return () => syncRef.off();
+        return () => off(syncRef);
     }
 
     saveCard(userId, card) {

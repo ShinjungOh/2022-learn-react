@@ -5,7 +5,6 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import Editor from "../editor/editor";
 import Preview from "../preview/preview";
-import card from "../card/card";
 
 const Maker = ({FileInput, authService, cardRepository}) => {
     const navigate = useNavigate();
