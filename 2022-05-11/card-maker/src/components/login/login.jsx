@@ -12,7 +12,6 @@ const Login = ({authService}) => {
     const onLogin = event => {
         authService
             .login(event.currentTarget.textContent)
-            //.then(console.log);
             .then(data => goToMaker(data.user.uid));
     }
 
