@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.module.css';
 import App from './app';
@@ -11,9 +11,9 @@ const authService = new AuthService(process.env);
 const cardRepository = new CardRepository();
 const imageUploader = new ImageUploader();
 
-const FileInput = props => (
+const FileInput = memo(props => (
     <ImageFileInput {...props} imageUploader={imageUploader}/>
-);
+));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
