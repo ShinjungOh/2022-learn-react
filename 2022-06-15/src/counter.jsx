@@ -1,37 +1,30 @@
 import React, {useState} from "react";
+import OddEvenResult from "./oddEvenResult";
 
-const Counter = () => {
-    const [count1, setCount1] = useState(0);
-    const [count2, setCount2] = useState(0);
+const Counter = ({initialValue}) => {
+    const [count, setCount] = useState(initialValue);
 
-    const onIncrease1 = () => {
-        setCount1(count1 + 1);
+    const onIncrease = () => {
+        setCount(count + 1);
     }
 
-    const onDecrease1 = () => {
-        setCount1(count1 - 1);
-    }
-
-    const onIncrease2 = () => {
-        setCount2(count2 + 1);
-    }
-
-    const onDecrease2 = () => {
-        setCount2(count2 - 1);
+    const onDecrease = () => {
+        setCount(count - 1);
     }
 
     return (
         <div>
-            <h2>{count1}</h2>
-            <button onClick={onIncrease1}>+</button>
-            <button onClick={onDecrease1}>-</button>
-            
-            <h2>{count2}</h2>
-            <button onClick={onIncrease2}>+</button>
-            <button onClick={onDecrease2}>-</button>
+            <h2>{count}</h2>
+            <button onClick={onIncrease}>+</button>
+            <button onClick={onDecrease}>-</button>
+            <OddEvenResult count={count}/>
         </div>
 
     );
+}
+
+Counter.defaultProps = {
+    initialValue: 0
 }
 
 export default Counter;
