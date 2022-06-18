@@ -52,17 +52,23 @@ function App() {
         setData([newItem, ...data]);
     }
 
-    const onDelete = (targetId) => {
+    const onRemove = (targetId) => {
         console.log(`${targetId}가 삭제됨`);
         const newDiaryList = data.filter(e => e.id !== targetId);
         setData(newDiaryList);
+    }
+
+    const onEdit = (targetId, newContent) => {
+        setData(
+            data.map(e => e.id === targetId ? {...e, content: newContent} : e)
+        );
     }
 
     return (
         <div className="App">
             <header className="App-header">
                 <DiaryEditor onCreate={onCreate}/>
-                <DiaryList diaryList={data} onDelete={onDelete}/>
+                <DiaryList diaryList={data} onRemove={onRemove} onEdit={onEdit}/>
             </header>
         </div>
     );
