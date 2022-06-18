@@ -1,7 +1,7 @@
 import React from "react";
 import DiaryItem from "./DiaryItem";
 
-const DiaryList = ({diaryList}) => {
+const DiaryList = ({diaryList, onDelete}) => {
     console.log(diaryList);
     return (
         <div className="DiaryList">
@@ -9,7 +9,7 @@ const DiaryList = ({diaryList}) => {
             <h4>{diaryList.length}개의 일기가 있습니다.</h4>
             <div>
                 {diaryList.map((e) => (
-                    <DiaryItem key={e.id} {...e}/>
+                    <DiaryItem key={e.id} {...e} onDelete={onDelete}/>
                 ))}
             </div>
         </div>
