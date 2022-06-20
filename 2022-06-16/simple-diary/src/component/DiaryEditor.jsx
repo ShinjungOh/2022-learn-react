@@ -48,6 +48,7 @@ const DiaryEditor = ({onCreate}) => {
                     name="author"
                     value={state.author}
                     onChange={handleChangeState}
+                    placeholder="작성자"
                 />
             </div>
             <div>
@@ -56,6 +57,7 @@ const DiaryEditor = ({onCreate}) => {
                     name="content"
                     value={state.content}
                     onChange={handleChangeState}
+                    placeholder="내용을 입력하세요."
                 />
             </div>
             <div>
