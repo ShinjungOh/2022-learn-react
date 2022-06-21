@@ -1,8 +1,7 @@
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import './App.css';
 import DiaryEditor from "./component/DiaryEditor";
 import DiaryList from "./component/DiaryList";
-import OptimizeTest from "./component/OptimizeTest";
 
 function App() {
     const [data, setData] = useState([]);
@@ -30,7 +29,7 @@ function App() {
         getData();
     }, []);
 
-    const onCreate = (author, content, emotion) => {
+    const onCreate = useCallback((author, content, emotion) => {
         const created_date = new Date().getTime();
         const newItem = {
             author,
@@ -40,33 +39,30 @@ function App() {
             id: dataId.current
         }
         dataId.current += 1;
-        setData([newItem, ...data]);
-    }
+        setData((data) => [newItem, ...data]); // 함수형 업데이트
+    }, []);
 
-    const onRemove = (targetId) => {
-        const newDiaryList = data.filter(e => e.id !== targetId);
-        setData(newDiaryList);
-    }
+    const onRemove = useCallback((targetId) => {
+        setData(data => data.filter(e => e.id !== targetId));
+    }, []);
 
-    const onEdit = (targetId, newContent) => {
-        setData(
+    const onEdit = useCallback((targetId, newContent) => {
+        setData((data) =>
             data.map(e => e.id === targetId ? {...e, content: newContent} : e)
         );
-    }
+    }, []);
 
-    const getDiaryAnalysis = useMemo(
-        () => {
-            const goodCount = data.filter(e => e.emotion >= 3).length;
-            const badCount = data.length - goodCount;
-            const goodRatio = (goodCount / data.length) * 100;
-            return {goodCount, badCount, goodRatio}
-        }, [data.length]);
+    const getDiaryAnalysis = useMemo(() => {
+        const goodCount = data.filter(e => e.emotion >= 3).length;
+        const badCount = data.length - goodCount;
+        const goodRatio = (goodCount / data.length) * 100;
+        return {goodCount, badCount, goodRatio}
+    }, [data.length]);
 
     const {goodCount, badCount, goodRatio} = getDiaryAnalysis;
 
     return (
         <div className="App">
-            <OptimizeTest/>
             <DiaryEditor onCreate={onCreate}/>
             <div>전체 일기 : {data.length}</div>
             <div>기분 좋은 일기 개수 : {goodCount}</div>

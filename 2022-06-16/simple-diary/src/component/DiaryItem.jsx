@@ -1,6 +1,10 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 const DiaryItem = ({id, author, content, emotion, created_date, onRemove, onEdit}) => {
+
+    useEffect(()=> {
+        console.log(`${id}번 째 아이템 렌더`);
+    });
 
     const [isEdit, setIsEdit] = useState(false);
     const toggleIsEdit = () => setIsEdit(!isEdit);
@@ -9,7 +13,6 @@ const DiaryItem = ({id, author, content, emotion, created_date, onRemove, onEdit
     const localContentInput = useRef();
 
     const handleRemove = () => {
-        console.log(id);
         if (window.confirm(`${id}번째 일기를 삭제하시겠습니까?`)) {
             onRemove(id);
         }
@@ -65,4 +68,4 @@ const DiaryItem = ({id, author, content, emotion, created_date, onRemove, onEdit
     );
 }
 
-export default DiaryItem;
+export default React.memo(DiaryItem);
