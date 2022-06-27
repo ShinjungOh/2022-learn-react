@@ -6,7 +6,7 @@ import New from './pages/New';
 import Edit from "./pages/Edit";
 import Diary from "./pages/Diary";
 
-const reducer = ({state, action}) => {
+const reducer = (state, action) => {
     let newState = [];
     switch (action.type) {
         case 'INIT': {
