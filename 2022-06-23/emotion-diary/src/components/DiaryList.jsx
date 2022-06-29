@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import MyButton from "./MyButton";
 import {useNavigate} from "react-router-dom";
 import DiaryItem from "./DiaryItem";
@@ -15,7 +15,7 @@ const filterOptionList = [
 ];
 
 
-const ControlMenu = ({value, onChange, optionList}) => {
+const ControlMenu = React.memo(({value, onChange, optionList}) => {
     return (
         <select className="ControlMenu"
                 value={value}
@@ -24,7 +24,7 @@ const ControlMenu = ({value, onChange, optionList}) => {
                 <option key={idx} value={e.value}>{e.name}</option>)}
         </select>
     );
-}
+});
 
 
 const DiaryList = ({diaryList}) => {
@@ -74,7 +74,6 @@ const DiaryList = ({diaryList}) => {
                               onClick={() => navigate('/new')}/>
                 </div>
             </div>
-
 
             {getProcessedDiaryList().map(e => (
                 <DiaryItem key={e.id} {...e}/>

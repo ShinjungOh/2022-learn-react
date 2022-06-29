@@ -10,4 +10,4 @@ const EmotionItem = ({emotion_id, emotion_img, emotion_description, onClick, isS
     );
 }
 
-export default EmotionItem;
+export default React.memo(EmotionItem);
