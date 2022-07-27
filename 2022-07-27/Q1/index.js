@@ -1,5 +1,6 @@
 import "style.css";
 import renderList from "./listRenderer";
+import {debounce} from './util';
 
 const app = document.querySelector("#app");
 const fetchMoreTrigger = document.querySelector("#fetchMore");
@@ -19,15 +20,20 @@ const onScroll = e => {
         scrollTop,
         clientHeight,
     } = e.target.scrollingElement;
+    console.log(scrollTop);  // 성능 저하의 요인
     if (scrollTop + clientHeight === scrollHeight) {
         fetchMore();
     }
 };
 
-document.addEventListener("scroll", onScroll);
+document.addEventListener("scroll", debounce(onScroll, 300));
 fetchMore();
 
 
 /**
- scrollTop, clientHeight, scrollHeight 등의 값이 무엇을 의미하는지를 개발자도구의 element 탭을 통해 파악하자.
+ * scroll 이벤트는 매우 많이 발생하므로 성능 저하가 우려된다. ‘fetchMore’ 동작은 스크롤의 최하단에서만 발생하므로 스크롤 이벤트 중 마지막 값에 대해서만 반응하는 것으로 충분하다.
+ * 이를 위한 기법 throttle / debounce
+ *
+ * throttle : 일정 시간 간격으로 한번씩만 실행
+ * debounce : 연속으로 발생하는 이벤트에 대해 마지막 한 번만 실행
  */
