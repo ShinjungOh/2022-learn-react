@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import postStore1 from '../../store/postStore';
+import {flowResult} from "mobx";
 
 const PostList = observer(() => {
-  const { getInitialPosts, posts, getPosts, isMax } = postStore1;
+  const { getInitialPosts, posts, isMax, getPostFlow } = postStore1;
 
   const getMorePosts = () => {
     if (isMax) {
@@ -12,7 +13,7 @@ const PostList = observer(() => {
       return;
     } else {
       // TODO: 3. getPostFlow 함수를 가져오세요
-      getPosts();
+      flowResult(getPostFlow());
     }
   };
 
