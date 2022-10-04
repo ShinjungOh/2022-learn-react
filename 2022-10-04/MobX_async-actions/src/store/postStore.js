@@ -87,5 +87,5 @@ class Post {
   }
 }
 
-const postStore1 = new Post();
-export default postStore1;
+const postStore = new Post();
+export default postStore;

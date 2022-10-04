@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import Button from '../../components/Button';
-import postStore1 from '../../store/postStore';
+import postStore from '../../store/postStore';
 
 const PostEdit = observer(() => {
   const history = useHistory();
   const { id } = useParams();
 
-  const { post, getPost, changePost, editPost } = postStore1;
+  const { post, getPost, changePost, editPost } = postStore;
 
   useEffect(() => {
     getPost(id);

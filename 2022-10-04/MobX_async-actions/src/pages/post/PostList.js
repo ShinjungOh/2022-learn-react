@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import postStore1 from '../../store/postStore';
+import postStore from '../../store/postStore';
 import {flowResult} from "mobx";
 
 const PostList = observer(() => {
-  const { getInitialPosts, posts, isMax, getPostFlow } = postStore1;
+  const { getInitialPosts, posts, isMax, getPostFlow } = postStore;
 
   const getMorePosts = () => {
     if (isMax) {
