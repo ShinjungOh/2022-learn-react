@@ -1,39 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getPostsApi } from '../../api/postApi';
+import postStore from "../../store/postStore";
+import {observer} from "mobx-react-lite";
 
-const PostList = () => {
+const PostList = observer(() => {
   // TODO: 1. posts, totalCount 모두 store로 옮기세요
-  const [posts, setPosts] = useState(null);
-  const [totalCount, setTotalCount] = useState(0);
   // TODO: 7. store로 옮긴 posts, totalCount(isMax를 이미 만들었다면 isMax), getInitialPosts, getPosts를 불러와 사용하세요
+  const { posts, isMax, getInitialPosts, getPosts } = postStore;
 
   // TODO: 3-1. getInitialPosts를 store로 옮겨보세요
-  const getInitialPosts = () => {
-    getPostsApi().then(({ data }) => {
-      const fiveContents = data.filter((content) => content.id <= 5);
-      setPosts(fiveContents);
-      setTotalCount(5);
-    });
-  };
 
   useEffect(() => {
     getInitialPosts();
-  }, []);
+  }, [getInitialPosts]);
 
   const getMorePosts = () => {
-    if (totalCount === 20) {
+    if (isMax) {
       alert('최대 20개만 불러올 수 있습니다.');
       return;
     }
+
     // TODO: 3-2. store의 getPosts 함수로 옮겨보세요
-    getPostsApi().then(({ data }) => {
-      const fiveContents = data.filter(
-        (content) => content.id <= totalCount + 5
-      );
-      setTotalCount(totalCount + 5);
-      setPosts(fiveContents);
-    });
+    getPosts();
   };
 
   return (
@@ -59,6 +47,6 @@ const PostList = () => {
       )}
     </>
   );
-};
+});
 
 export default PostList;
