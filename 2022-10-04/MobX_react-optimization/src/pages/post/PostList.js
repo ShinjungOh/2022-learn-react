@@ -37,12 +37,10 @@ const PostList = observer(() => {
           </div>
           {/* TODO: 1. id, title, body가 아니라 post 자체를 넘겨주세요 */}
           {/* TODO: 2. key는 index가 아닌 값으로 바꾸어주세요 */}
-          {posts?.map((post, index) => (
+          {posts?.map((post) => (
             <PostWrap
-              id={post.id}
-              title={post.title}
-              body={post.body}
-              key={index}
+              post={post}
+              key={post.id}
             />
           ))}
           <div className="more-post-div">

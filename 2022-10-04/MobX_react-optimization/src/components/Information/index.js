@@ -4,6 +4,9 @@ import React from 'react';
 // TODO: 3. Information의 값을 참조하는 GenericInformation 만들기
 export const GenericInformation = observer(({ getInfo }) => {
   // info를 getInfo()로 가져오세요
+  return (
+      <Information info={getInfo()} />
+  );
 });
 
 const Information = ({ info }) => {

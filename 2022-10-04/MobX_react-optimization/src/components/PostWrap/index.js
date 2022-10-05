@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
+import {observer} from "mobx-react-lite";
 
-const PostWrap = ({ id, title, body }) => {
+const PostWrap = observer(({ post }) => {
   console.log('PostWrap render!');
   return (
     <div className="post-list">
-      <Link to={`/detail/${id}`}>
-        <h3>{title}</h3>
-        <p>{body}</p>
+      <Link to={`/detail/${post.id}`}>
+        <h3>{post.title}</h3>
+        <p>{post.body}</p>
       </Link>
     </div>
   );
-};
+});
 
 export default PostWrap;
